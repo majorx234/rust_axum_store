@@ -1,0 +1,23 @@
+[package]
+name = "rust_axum_store"
+version = "0.1.0"
+authors = ["MajorX234 <majorx234@googlemail.com>"]
+edition = "2024"
+
+[lib]
+name = "store"
+path = "src/lib.rs"
+
+[[bin]]
+name = "rust_axum_store_server"
+path = "src/main.rs"
+
+[dependencies]
+axum = { version = "0.8.8", features=["ws"]}
+axum-extra = { version = "0.12.5", features = ["typed-header"] }
+bytes = "1.11.0"
+rusqlite = { version = "0.38.0", features = ["bundled"] }
+tracing-subscriber = { version = "0.3.22", features = ["env-filter"] }
+tokio = { version = "1.49.0", features = ["full"] }
+tower = { version = "0.4.13", features = ["util", "timeout"] }
+tower-http = { version = "0.6.8", features = ["fs", "trace"] }
