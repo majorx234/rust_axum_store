@@ -1,25 +1,23 @@
-use std:: sync::Mutex;
+use std::{boxed::Box, sync::Mutex};
 use std::sync::Arc;
 
 use rusqlite::{Connection};
 
-#[derive(Clone)]
-pub struct ServerState {
-    pub db: Arc<Mutex<Connection>>,
+pub struct ServerElements {
+    pub db: Connection,
 }
-impl ServerState {
-    pub fn new() -> ServerState {
+impl ServerElements {
+    pub fn new() -> ServerElements {
         let db_path = "db.sqlite";
         let db = Connection::open(db_path).expect("db.sqlite cannot be found");
 
-        ServerState {
-            db: Arc::new(Mutex::new(db)),
-        }
+        ServerElements { db }
     }
 }
-
-impl Default for ServerState {
+impl Default for ServerElements {
     fn default() -> Self {
         Self::new()
     }
 }
+
+pub type ServerState = Arc<Mutex<ServerElements>>;
