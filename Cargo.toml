@@ -21,3 +21,4 @@ tracing-subscriber = { version = "0.3.22", features = ["env-filter"] }
 tokio = { version = "1.49.0", features = ["full"] }
 tower = { version = "0.4.13", features = ["util", "timeout"] }
 tower-http = { version = "0.6.8", features = ["fs", "trace"] }
+tracing = "0.1.44"
