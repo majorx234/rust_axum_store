@@ -1,9 +1,7 @@
-use axum::{Json, extract::State, http::Error};
-use crate::{server_state::ServerState};
+use axum::{Json, extract::State};
+use crate::{server_state::ServerState, error::AppError};
 
-pub async fn hello_handler(State(state): State<ServerState>) -> Result<Json<String>, Error> {
-    let state = state;
-    //db.clone();
+pub async fn hello_handler(State(state): State<ServerState>) -> Result<Json<String>, AppError> {
 
     // TODO do sqlite stuff here
     // let text = tokio::task::spawn_blocking(move || {

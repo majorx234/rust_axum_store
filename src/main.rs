@@ -26,7 +26,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     let app_state:ServerState = Arc::new(Mutex::new(ServerElements::new()));
     let routes_all = Router::new()
-        .route("/hello", get(hello_world::hello_handler)
+        .route("/hello", get(hello_world::hello_handler))
         .with_state(app_state);
 
     let listener = tokio::net::TcpListener::bind("127.0.0.1:3000").await?;
