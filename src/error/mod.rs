@@ -1,6 +1,8 @@
 use serde_json::json;
 use thiserror::Error;
 use axum::{http, response::{IntoResponse, Response}};
+use tokio::task::JoinError;
+
 
 #[derive(Error, Debug)]
 pub enum AppError {
@@ -8,6 +10,8 @@ pub enum AppError {
     Db(#[from] rusqlite::Error),
     #[error("Serialization error: {0}")]
     Serde(#[from] serde_json::Error),
+    #[error("TokioTask error: {0}")]
+    JoinError(#[from] JoinError),
 }
 
 impl IntoResponse for AppError {
