@@ -12,7 +12,7 @@ use store::{
 };
 
 use tower::ServiceBuilder;
-use tower_http::trace::TraceLayer;
+use tower_http::trace::{DefaultMakeSpan, TraceLayer};
 
 
 #[tokio::main]
@@ -27,6 +27,9 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let app_state:ServerState = Arc::new(Mutex::new(ServerElements::new()));
     let routes_all = Router::new()
         .route("/hello", get(hello_world::hello_handler))
+        .layer(
+            TraceLayer::new_for_http()
+                .make_span_with(DefaultMakeSpan::default().include_headers(true)),)
         .with_state(app_state);
 
     let listener = tokio::net::TcpListener::bind("127.0.0.1:3000").await?;
