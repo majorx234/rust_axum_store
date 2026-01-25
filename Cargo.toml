@@ -12,6 +12,10 @@ path = "src/lib.rs"
 name = "rust_axum_store_server"
 path = "src/main.rs"
 
+[[bin]]
+name ="init_store_database"
+path = "src/init_store_database/bin/main.rs"
+
 [dependencies]
 axum = { version = "0.8.8", features=["ws", "macros"]}
 axum-extra = { version = "0.12.5", features = ["typed-header"] }
