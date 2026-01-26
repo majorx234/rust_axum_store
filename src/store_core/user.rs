@@ -1,8 +1,11 @@
 use uuid::Uuid;
+use chrono;
 
+#[derive(Debug)]
 pub struct User{
-    id: Uuid,
-    name: String,
+    pub id: Uuid,
+    pub name: String,
+    pub created_at: chrono::NaiveDateTime,
 }
 
 impl User{
@@ -11,6 +14,7 @@ impl User{
         User{
             id,
             name,
+            created_at: chrono::Utc::now().naive_utc(),
         }
     }
 }
