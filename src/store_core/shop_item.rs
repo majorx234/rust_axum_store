@@ -15,4 +15,12 @@ impl ShopItem{
             price
         }
     }
+
+    pub fn get_id(&self) -> Uuid {
+        self.id.clone()
+    }
+
+    pub fn get_prize(&self) -> u32 {
+        self.price
+    }
 }
