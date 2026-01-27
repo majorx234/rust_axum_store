@@ -2,7 +2,7 @@ use std::sync::Arc;
 use async_trait::async_trait;
 
 #[async_trait]
-pub trait UserDatabase: Send + Sync {
+pub trait UserDatabase: {
     async fn create_user(&self, username: &str, password_hash: &str);
 }
 
