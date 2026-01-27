@@ -2,7 +2,6 @@ use std::sync::{Arc, Mutex};
 
 use axum::{Router, middleware, routing::get};
 
-use rusqlite::{Connection, Result as RusqliteResult};
 use std::net::SocketAddr;
 use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
 use store::{

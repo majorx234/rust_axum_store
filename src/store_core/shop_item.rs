@@ -17,7 +17,11 @@ impl ShopItem{
     }
 
     pub fn get_id(&self) -> Uuid {
-        self.id.clone()
+        self.id
+    }
+
+    pub fn get_name(&self) -> String {
+        self.name.clone()
     }
 
     pub fn get_prize(&self) -> u32 {

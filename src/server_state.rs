@@ -1,4 +1,4 @@
-use std::{boxed::Box, sync::Mutex};
+use std::sync::Mutex;
 use std::sync::Arc;
 
 use rusqlite::{Connection};
