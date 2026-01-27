@@ -1,6 +1,5 @@
-use serde_json::json;
 use thiserror::Error;
-use axum::{http, response::{IntoResponse, Response}};
+use axum::{http::StatusCode, response::{IntoResponse, Response}};
 use tokio::task::JoinError;
 
 
@@ -16,8 +15,17 @@ pub enum AppError {
 
 impl IntoResponse for AppError {
     fn into_response(self) -> Response {
-        println!("->> {:12} - {self:?}", "INTO_RES");
-
-        (http::StatusCode::INTERNAL_SERVER_ERROR, self.to_string()).into_response()
+        tracing::error!(error = ?self, "->> {:12} - {self:?}", "INTO_RES");
+        match self{
+            AppError::Db(_) => {
+                (StatusCode::INTERNAL_SERVER_ERROR, "Database error").into_response()
+            }
+            AppError::Serde(_) =>  {
+                (StatusCode::INTERNAL_SERVER_ERROR, "Data error").into_response()
+            }
+            AppError::JoinError(_) => {
+                (StatusCode::INTERNAL_SERVER_ERROR, self.to_string()).into_response()
+            }
+        }
     }
 }
