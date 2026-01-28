@@ -7,16 +7,16 @@ pub trait UserDatabase: {
 }
 
 pub trait UserPasswordHasher: Send + Sync {
-    fn hash_password(&self, password: &str) -> &str;
+    fn hash_password(&self, password: &str) -> String;
 }
 
 #[derive(Clone)]
-pub struct UserPool{
+pub struct UserDbPool{
     hasher: Arc<dyn UserPasswordHasher>,
     user_database: Arc<dyn UserDatabase>,
 }
 
-impl UserPool{
+impl UserDbPool{
     pub fn new(user_database: Arc<dyn UserDatabase>, hasher: Arc<dyn UserPasswordHasher>) -> Self {
         Self {
             hasher,
