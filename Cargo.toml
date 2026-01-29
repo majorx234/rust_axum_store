@@ -13,6 +13,10 @@ name = "rust_axum_store_server"
 path = "src/main.rs"
 
 [[bin]]
+name = "start_app_store_server"
+path = "src/server_infra/start_app_store_server.rs"
+
+[[bin]]
 name ="init_store_database"
 path = "src/init_store_database/bin/main.rs"
 
