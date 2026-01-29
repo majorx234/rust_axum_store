@@ -3,7 +3,7 @@ use async_trait::async_trait;
 use rusqlite::{Connection};
 use uuid::Uuid;
 
-use crate::store_app::user_management::UserDatabase;
+use crate::{config::Config, store_app::user_management::UserDatabase};
 
 #[derive(Clone)]
 pub struct SQLiteUserDatabase{
@@ -12,12 +12,17 @@ pub struct SQLiteUserDatabase{
 
 impl SQLiteUserDatabase {
     pub fn new() -> Self {
-        // TODO: param in new for slqite file
-        let db_path = "db.sqlite";
-        let db = Connection::open(db_path).expect("db.sqlite cannot be found");
+        let config = Config::new();
+        let db_path = config.get_sqlite_db_file_path();
+        let db = Connection::open(db_path).unwrap_or_else(|_|panic!("{} cannot be found", db_path));
         SQLiteUserDatabase {
             db: Arc::new(Mutex::new(db)),
         }
+    }
+}
+impl Default for SQLiteUserDatabase{
+    fn default() -> Self {
+        Self::new()
     }
 }
 

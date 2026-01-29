@@ -9,8 +9,6 @@ pub struct ServerElements {
 }
 impl ServerElements {
     pub fn new() -> ServerElements {
-//        let db_path = "db.sqlite";
-        //        let db = Connection::open(db_path).expect("db.sqlite cannot be found");
         let db = Arc::new(SQLiteUserDatabase::new());
         let hasher = Arc::new(ArgonPasswordHasher::new());
         let user_db_pool = UserDbPool::new(db, hasher);
