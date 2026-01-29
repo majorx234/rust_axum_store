@@ -1,10 +1,9 @@
 use crate::adapters::crypto::ArgonPasswordHasher;
 use crate::adapters::sqlite::SQLiteUserDatabase;
 use crate::store_app::user_management::UserDbPool;
-use rusqlite::Connection;
 use std::sync::Arc;
-use std::sync::Mutex;
 
+#[derive(Clone)]
 pub struct ServerElements {
     pub user_db_pool: UserDbPool,
 }
@@ -24,5 +23,3 @@ impl Default for ServerElements {
         Self::new()
     }
 }
-
-pub type ServerState = Arc<Mutex<ServerElements>>;
